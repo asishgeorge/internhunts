@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/spa",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -8,9 +8,25 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "/get/**",
         "function": "app"
+      },
+      {
+        "source": "**",
+        "destination": "index.html"
       }
-    ]
+    ],
+    "headers": [
+      {
+        "source": "/get/**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
+    ],
+    "cleanURLs": true
   }
 }

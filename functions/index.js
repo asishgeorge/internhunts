@@ -6,14 +6,17 @@ const axios = require('axios')
 const app = express();
 
 app.get('/get/:data', (req, res) => {
-    const key = req.params.data.trim();
-    console.log(key);
+    const key = req.params.data.trim().replace('-', ' ');
+    if (key) {
+        internshalaExtract(key)
+            .then((r) => {
+                res.send(r)
+            })
 
-    internshalaExtract(key)
-        .then((r) => {
-            res.send(r)
-        })
 
+    } else {
+        res.send('Nothing')
+    }
 
 })
 
